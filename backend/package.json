@@ -1,5 +1,5 @@
 {
-  "name": "inotebook-backend",
+  "name": "enotebook-backend",
   "version": "1.0.0",
   "description": "iNoteBook - Your notebook on the cloud",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "enotebook-backend": "file:",
     "express": "^4.21.1",
     "inotebook-backend": "file:",
     "mongoose": "^8.8.1"

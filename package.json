@@ -1,5 +1,5 @@
 {
-  "name": "inotebook",
+  "name": "enotebook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +9,7 @@
     "axios": "^1.7.7",
     "concurrently": "^9.1.0",
     "dotenv": "^16.4.5",
+    "enotebook": "file:",
     "inotebook": "file:",
     "mongoose": "^8.8.1",
     "react": "^18.3.1",
