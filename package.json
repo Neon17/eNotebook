@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "both": "concurrently \"npm run start\" \"nodemon backend/app.js\"",
+    "both": "concurrently \"npm run start\" \"nodemon backend/server.js\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -10,9 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "enotebook-backend": "file:",
     "express": "^4.21.1",
     "inotebook-backend": "file:",
-    "mongoose": "^8.8.1"
+    "mongoose": "^8.8.1",
+    "validator": "^13.12.0"
   }
 }

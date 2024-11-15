@@ -1,14 +1,18 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
 const app = express();
+
+const cors = require('cors');
+//selected website to be allowed to fetch data from this site
 const corsOptions = {
-    origin: ["http://localhost:3000"]
+    origin: [
+        "http://localhost:3000/notes",
+        "http://localhost:3000"
+    ]
 }
 
 app.use(cors(corsOptions));
+
+const noteRouter = require('./routes/NoteRouter');
 
 app.get('/',(req,res)=>{
     res.json({
@@ -17,7 +21,6 @@ app.get('/',(req,res)=>{
     });
 })
 
-let port = 5000;
-app.listen((port),(conn)=>{
-    console.log(`Successfully connected to http://localhost:${port}`);
-})
+app.use('/api/v1/notes',noteRouter);
+
+module.exports = app;
