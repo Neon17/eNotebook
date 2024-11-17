@@ -49,7 +49,7 @@ function Home (props){
 
     setTimeout(()=>{
         setStatus(null);
-    },3000)
+    },5000)
 
     return (
         <div>
@@ -74,7 +74,7 @@ function Home (props){
                 </button>
 
                 {!status || 
-                    <div className={`mt-1 alert alert-${statusColor}`} role="alert">
+                    <div className={`mt-2 alert alert-${statusColor}`} role="alert">
                         {status}
                     </div>
                 }

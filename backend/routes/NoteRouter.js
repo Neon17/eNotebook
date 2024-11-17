@@ -7,5 +7,8 @@ noteRouter.route('/')
     .get(noteController.getNotes)
     .post(noteController.postNotes);
 
+noteRouter.route('/:id')
+    .patch(noteController.updateNote)
+    .delete(noteController.deleteNote)
 
 module.exports = noteRouter;
