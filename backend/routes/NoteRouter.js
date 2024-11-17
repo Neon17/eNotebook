@@ -8,6 +8,7 @@ noteRouter.route('/')
     .post(noteController.postNotes);
 
 noteRouter.route('/:id')
+    .get(noteController.getNote)
     .patch(noteController.updateNote)
     .delete(noteController.deleteNote)
 

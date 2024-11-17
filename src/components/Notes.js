@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React,{useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Notes(props){
 
@@ -57,8 +58,8 @@ export default function Notes(props){
                             <h5 className="card-title">{element.title}</h5>
                             <p className="card-text">{element.description}</p>
                             <p className="card-text">{element.date.split('T')[0]}</p>
-                            <a href="#" className="btn btn-success btn-sm my-1" onClick={()=>editNote(element._id)}>Edit</a>
-                            <a href="#" className="btn btn-danger btn-sm my-1 ms-1" onClick={()=>deleteNote(element._id)}>Delete</a>
+                            <Link to={`/notes/edit/${element._id}`} className="btn btn-success btn-sm my-1" onClick={()=>editNote(element._id)}>Edit</Link>
+                            <a href="" className="btn btn-danger btn-sm my-1 ms-1" onClick={()=>deleteNote(element._id)}>Delete</a>
                         </div>
                     </div>)
                 }))}

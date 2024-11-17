@@ -1,13 +1,37 @@
 const Note = require('./../Models/Note');
 const fs = require('fs');
 
-exports.getNotes = async (req,res)=>{
+const asyncErrorHandler = (func)=>{
+    return (req,res,next)=>{
+        (func(req,res,next)).catch((err)=>{
+            res.status(404);
+            res.json({
+                status: 'error',
+                message: err.message
+            })   
+        })
+    }
+}
+
+exports.getNotes = asyncErrorHandler(async (req,res)=>{
     const data = await Note.find({});
     res.json({
         status: 'success',
         data: data
     });   
-}
+})
+
+exports.getNote = asyncErrorHandler(async (req,res)=>{
+    const id = req.params.id
+    const data = await Note.findById(id);
+    if (!data)
+        throw new Error("A movie with that ID doesn't exists");
+    res.status(200);
+    res.json({
+        status: 'success',
+        data: data
+    })
+})
 
 exports.updateNote = async (req,res)=>{
     try {

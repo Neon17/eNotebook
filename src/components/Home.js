@@ -54,6 +54,7 @@ function Home (props){
     return (
         <div>
             <div className="container">
+                <h3 className='mb-4 mt-3'>Create a Note</h3>
                 <div className="mb-3">
                     <label htmlFor="" className="form-label">Title of Note: </label>
                     <input type="text" className="form-control" onChange={changeField} name="" id="titleNote1234" aria-describedby="helpId" placeholder=""/>
