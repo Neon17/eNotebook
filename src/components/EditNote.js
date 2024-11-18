@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React,{useEffect, useState} from 'react';
-import { redirect, useParams } from 'react-router-dom';
+import { redirect, useParams, Link } from 'react-router-dom';
 
 function EditNote (){
     let [title, setTitle] = useState("");
@@ -70,8 +70,11 @@ function EditNote (){
 
     return (
         <div>
-            <div className="container">
-                <h3 className='mb-4 mt-3'>Edit a Note</h3>
+            <div className="container">                
+                <h3 className='mb-4 mt-3 d-flex align-items-center'>
+                    <Link name="" id="" class="btn btn-light m-2" to="/notes" role="button">&larr;</Link>
+                    Edit a Note
+                </h3>
                 <div className="mb-3">
                     <label htmlFor="" className="form-label">Title of Note: </label>
                     <input type="text" value={title} className="form-control" onChange={changeField} name="" id="titleNote1234" aria-describedby="helpId" placeholder=""/>

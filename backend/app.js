@@ -11,10 +11,11 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 const noteRouter = require('./routes/NoteRouter');
+const userRouter = require('./routes/UserRouter');
 
-app.use(express.json());
 app.get('/',(req,res)=>{
     res.json({
         status: 'success',
@@ -23,5 +24,6 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/v1/notes',noteRouter);
+app.use('/api/v1/users',userRouter);
 
 module.exports = app;
