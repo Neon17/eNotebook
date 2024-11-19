@@ -1,5 +1,7 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
+import noteContext from '../context/notes/noteContext';
+import { useNavigate } from 'react-router-dom';
 
 function Home (props){
     let [status, setStatus] = useState(null);
@@ -7,6 +9,8 @@ function Home (props){
     let [date,setDate] = useState(new Date().toISOString().split("T")[0]);
     let [note,setNote] = useState("");
     let [title, setTitle] = useState("");
+    const context = useContext(noteContext);
+    const navigate = useNavigate();
 
     const changeField = (event)=>{
         if (event.target.id === 'dateNote1234')
@@ -16,6 +20,11 @@ function Home (props){
         else if (event.target.id === 'fullNote1234')
             setNote(event.target.value);
     }
+
+    useEffect(()=>{
+        if (!context.token)
+            navigate("/login",{ replace: true })  
+    })
 
     let postNote = ()=>{
         const axiosConfig = {

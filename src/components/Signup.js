@@ -1,8 +1,10 @@
 import axios from 'axios';
-import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useContext, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import noteContext from '../context/notes/noteContext';
 
 export default function Signup(props){
+    let context = useContext(noteContext);
     const navigate = useNavigate();
 
     let [name,setName] = useState("");
@@ -39,7 +41,8 @@ export default function Signup(props){
                 setName(""); setConfirmPassword("");
             }
             else {
-               navigate("/",{ replace: true })  
+                context.setToken(res.data.token);
+                navigate("/",{ replace: true })  
             }
         }).catch((err)=>{
             console.error(err.message);
@@ -121,6 +124,9 @@ export default function Signup(props){
                 </div>                
 
             </div> 
+            <nav className="nav justify-content-center  ">
+                <Link className="nav-link active" to="/login" aria-current="page">Login</Link>
+            </nav>
             {status && 
             <div className="d-block my-2" style={{width: "25rem"}}>
                 <div

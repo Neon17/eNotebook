@@ -1,17 +1,25 @@
 import axios from 'axios';
-import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React,{useContext, useEffect, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import noteContext from '../context/notes/noteContext';
 
 export default function Notes(props){
-
+    let context = useContext(noteContext);
+    const navigate = useNavigate();
     let [data,setData] = useState();
     let [alert,setAlert] = useState(null);
     let [alertColor, setAlertColor] = useState(null);
     
     useEffect(()=>{
-        axios.get("http://localhost:5000/api/v1/notes/")
-            .then((res)=>setData(res.data.data))
-            .catch((err)=>console.error(err));
+        if (!context.token)
+            navigate('/login',{ replace: true })
+        else {
+            axios.get("http://localhost:5000/api/v1/notes/")
+                .then((res)=>{
+                    setData(res.data.data);
+                })
+                .catch((err)=>console.error(err));
+        }
     },[])
     
     let deleteNote = async(id)=>{
@@ -27,6 +35,7 @@ export default function Notes(props){
     }
 
     const editNote = async(id)=>{
+        console.log(context.token);
         let res = await axios.patch(`http://localhost:5000/api/v1/notes/${id}`);
         if (res.data.status==='success'){
             setAlert("Success! Note is deleted");
