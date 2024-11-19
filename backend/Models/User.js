@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcyrpt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -28,12 +28,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.comparePasswordInDb = async (pswd, pswdDB)=>{
-    return await bcyrpt.compare(pswd, pswdDB);
+    return await bcrypt.compare(pswd, pswdDB);
 }
 
 userSchema.pre('save',function (next){
     this.confirmPassword = null;
-    bcyrpt.hash(this.password, 12);
+    this.password = bcrypt.hashSync(this.password, 12);
     this.confirmPassword = undefined;
     next();
 })

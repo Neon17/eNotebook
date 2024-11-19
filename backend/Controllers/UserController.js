@@ -49,13 +49,11 @@ exports.login = async (req,res)=>{
         if (!user){
             throw new Error('Incorrect username or password');
         }
-        console.log(email);
-        // const isMatch = await user.comparePasswordInDb(password, user.password);
-        const isMatch = (password===user.password);
+
+        const isMatch = await user.comparePasswordInDb(password, user.password);
         if (!isMatch){
             throw new Error('Incorrect username or password');
         }
-        console.log(email);
         
         //token is now created
         const token = signToken(user._id);
