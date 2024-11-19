@@ -33,7 +33,7 @@ userSchema.methods.comparePasswordInDb = async (pswd, pswdDB)=>{
 
 userSchema.pre('save',function (next){
     this.confirmPassword = null;
-    bcrypt.hash(this.password, 12);
+    bcyrpt.hash(this.password, 12);
     this.confirmPassword = undefined;
     next();
 })

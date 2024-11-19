@@ -22,7 +22,7 @@ const protect = async(req,res,next)=>{
     req.user = user;    
 }
 
-userRouter.get('/signup',userController.signUp);
-userRouter.get('/login',userController.login);
+userRouter.post('/signup',userController.signUp);
+userRouter.post('/login',userController.login);
 
 module.exports = userRouter;
