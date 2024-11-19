@@ -11,7 +11,7 @@ export default function Notes(props){
     let [alertColor, setAlertColor] = useState(null);
     
     useEffect(()=>{
-        if (!context.token)
+        if ((!context.token)&&(!localStorage.getItem('token')))
             navigate('/login',{ replace: true })
         else {
             axios.get("http://localhost:5000/api/v1/notes/")

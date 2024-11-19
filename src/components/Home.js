@@ -22,7 +22,7 @@ function Home (props){
     }
 
     useEffect(()=>{
-        if (!context.token)
+        if ((!context.token)&&(!localStorage.getItem('token')))
             navigate("/login",{ replace: true })  
     })
 

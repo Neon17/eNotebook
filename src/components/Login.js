@@ -34,6 +34,7 @@ export default function Login(props){
                 setEmail(""); setPassword("");
             }
             else {
+                localStorage.setItem('token', res.data.token);
                 context.setToken(res.data.token);
                 navigate("/",{ replace: true })  
             }
