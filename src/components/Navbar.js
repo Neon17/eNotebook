@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Navbar(props){
+    let location = useLocation();
+    let navigate = useNavigate();
     let state;
     let [btns,setBtns] = useState(null)
-    setInterval(()=>{
+
+    useEffect(()=>{
         state = localStorage.getItem('token');
         if (state==null){
             setBtns(<><Link name="" id="" className="btn btn-primary me-2" to="/login" role="button" >Login</Link>
@@ -12,8 +15,9 @@ function Navbar(props){
         }
         else {
             setBtns(<Link name="" id="" className="btn btn-primary me-2" to="/logout" role="button" >Logout</Link>)
+            if ((location.pathname==='/login')||(location.pathname==='/signup')) navigate('/');
         }
-    },1000);
+    },[location])
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary border">
             <div className="container-fluid">
@@ -24,16 +28,13 @@ function Navbar(props){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                    <Link className={`nav-link${(location.pathname==='/home')?' active':''}`} aria-current="page" to="/">Home</Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/">About</Link>
+                    <Link className={`nav-link${(location.pathname==='/about')?' active':''}`} to="/about">About</Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/notes">Notes</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link disabled" to='/' aria-disabled="true">Disabled</Link>
+                    <Link className={`nav-link${(location.pathname==='/notes')?' active':''}`} to="/notes">Notes</Link>
                     </li>
                 </ul>
                 {btns}             

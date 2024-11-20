@@ -28,8 +28,8 @@ function Home (props){
     let postNote = ()=>{
         const axiosConfig = {
             headers: {
-                "Content-Type": "application/json"
-                // "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
             }
         }
         axios.post(
