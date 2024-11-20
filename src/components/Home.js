@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState, useContext, useEffect } from 'react';
-import noteContext from '../context/notes/noteContext';
+import React, { useState, useEffect } from 'react';
+// import noteContext from '../context/notes/noteContext';
 import { useNavigate } from 'react-router-dom';
 
 function Home (props){
@@ -9,7 +9,6 @@ function Home (props){
     let [date,setDate] = useState(new Date().toISOString().split("T")[0]);
     let [note,setNote] = useState("");
     let [title, setTitle] = useState("");
-    const context = useContext(noteContext);
     const navigate = useNavigate();
 
     const changeField = (event)=>{
@@ -22,7 +21,7 @@ function Home (props){
     }
 
     useEffect(()=>{
-        if ((!context.token)&&(!localStorage.getItem('token')))
+        if ((!localStorage.getItem('token')))
             navigate("/login",{ replace: true })  
     })
 

@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 function Navbar(props){
+    let state;
+    let [btns,setBtns] = useState(null)
+    setInterval(()=>{
+        state = localStorage.getItem('token');
+        if (state==null){
+            setBtns(<><Link name="" id="" className="btn btn-primary me-2" to="/login" role="button" >Login</Link>
+            <Link name="" id="" className="btn btn-primary" to="/signup" role="button" >Signup</Link></>);
+        }
+        else {
+            setBtns(<Link name="" id="" className="btn btn-primary me-2" to="/logout" role="button" >Logout</Link>)
+        }
+    },1000);
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary border">
             <div className="container-fluid">
@@ -24,10 +36,7 @@ function Navbar(props){
                     <Link className="nav-link disabled" to='/' aria-disabled="true">Disabled</Link>
                     </li>
                 </ul>
-                <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                {btns}             
                 </div>
             </div>
         </nav>

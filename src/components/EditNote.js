@@ -20,7 +20,7 @@ function EditNote (){
 
     useEffect(()=>{
         fetchEditAPI();
-    },[])
+    })
 
     const changeField = (event)=>{
         if (event.target.id==="titleNote1234"){
@@ -72,7 +72,7 @@ function EditNote (){
         <div>
             <div className="container">                
                 <h3 className='mb-4 mt-3 d-flex align-items-center'>
-                    <Link name="" id="" class="btn btn-light m-2" to="/notes" role="button">&larr;</Link>
+                    <Link name="" id="" className="btn btn-light m-2" to="/notes" role="button">&larr;</Link>
                     Edit a Note
                 </h3>
                 <div className="mb-3">
