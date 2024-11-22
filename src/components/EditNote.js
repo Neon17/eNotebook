@@ -12,7 +12,10 @@ function EditNote (){
     let [statusColor, setStatusColor] = useState(null);
 
     const fetchEditAPI = async()=>{
-        const response = await axios.get(`http://localhost:5000/api/v1/notes/${id}`);
+        const headers = {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }
+        const response = await axios.get(`http://localhost:5000/api/v1/notes/${id}`,{ headers });
         setDate(response.data.data.date.split('T')[0]);
         setNote(response.data.data.description);
         setTitle(response.data.data.title);
@@ -20,16 +23,18 @@ function EditNote (){
 
     useEffect(()=>{
         fetchEditAPI();
-    })
+    },[])
 
     const changeField = (event)=>{
         if (event.target.id==="titleNote1234"){
             setTitle(event.target.value);
         }
         else if (event.target.id==='fullNote1234'){
+            console.log('note');
             setNote(event.target.value);
         }
         else if (event.target.id==='dateNote1234'){
+            console.log('date');
             setDate(event.target.value);
         }
     }
@@ -37,7 +42,8 @@ function EditNote (){
     const updateNote = ()=>{
         //update button clicked
         const axiosConfig={headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
         }};
         axios.patch(
             `http://localhost:5000/api/v1/notes/${id}`,
@@ -66,7 +72,7 @@ function EditNote (){
 
     setTimeout(() => {
         setStatus(null);
-    }, 3000);
+    }, 5000);
 
     return (
         <div>

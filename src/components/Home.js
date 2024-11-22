@@ -26,11 +26,10 @@ function Home (props){
     })
 
     let postNote = ()=>{
-        const axiosConfig = {
-            headers: {
+        const headers= {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            }
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
         }
         axios.post(
             "http://localhost:5000/api/v1/notes",
@@ -39,7 +38,7 @@ function Home (props){
                 description: note,
                 date: date
             },
-            axiosConfig
+            { headers }
         )
         .then((res)=>{
             if (res.data.status === 'success'){
@@ -48,19 +47,19 @@ function Home (props){
             }
             else if (res.data.status === 'error'){
                 if (res.data.message === 'jwt expired'){
+                    localStorage.removeItem('token');
                     navigate('/login',{ replace: true })
                 }
                 setStatus(`Error! ${res.message}`);
                 setStatusColor('danger');
             }
-            console.log(res.data.status);
         })
         .catch((err)=>console.error(err));
     }
 
     setTimeout(()=>{
         setStatus(null);
-    },5000)
+    },6000)
 
     return (
         <div>

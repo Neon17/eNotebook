@@ -14,7 +14,11 @@ const noteSchema = new mongoose.Schema({
         required: true,
         default: Date.now()
     },
-    location: String
+    location: String,
+    createdBy: {
+        type: mongoose.Schema.ObjectId,
+        required: [true, 'created by is required']
+    }
 })
 
 const Note = mongoose.model('Notes',noteSchema);

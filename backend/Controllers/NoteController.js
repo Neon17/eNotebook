@@ -2,10 +2,12 @@ const Note = require('./../Models/Note');
 const asyncErrorHandler = require('./../utils/AsyncErrorHandler');
 
 exports.getNotes = asyncErrorHandler(async (req,res)=>{
-    const data = await Note.find({});
+    const globalNotes = await Note.find({"createdBy": {$exists: false}});
+    const localNotes = await Note.find({"createdBy": req.user._id})
     res.json({
         status: 'success',
-        data: data
+        globalNotes,
+        localNotes
     });   
 })
 
@@ -45,6 +47,7 @@ exports.updateNote = async (req,res)=>{
 
 exports.postNotes = async (req,res)=>{
     try {
+        req.body.createdBy = req.user._id;
         const note = await Note.create(req.body);
         res.status(200);
         res.json({
