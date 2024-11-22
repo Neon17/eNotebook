@@ -2,8 +2,24 @@ const Note = require('./../Models/Note');
 const asyncErrorHandler = require('./../utils/AsyncErrorHandler');
 
 exports.getNotes = asyncErrorHandler(async (req,res)=>{
-    const globalNotes = await Note.find({"createdBy": {$exists: false}});
+    const globalNotes = await Note.find({$or: [{"createdBy": {$exists: false}},{"visibility": 'Global'}]});
+    // let i = 0,len = globalNotes.length;
+    // for (i=0;i<len;i++){
+    //     // console.log(globalNotes[i].createdBy==undefined);
+    //     // if (globalNotes[i].createdBy!=undefined){
+    //     //     console.log(globalNotes[i].createdBy);
+    //     //     console.log(req.user._id);
+    //     // }
+    //     if (globalNotes[i].createdBy==req.user._id){
+    //         console.log('nice');
+    //     }
+    //     if ((globalNotes[i].createdBy!=undefined)&&(globalNotes[i].createdBy==req.user._id)){
+    //         console.log('hello');
+    //         delete globalNotes[i];
+    //     }
+    // }
     const localNotes = await Note.find({"createdBy": req.user._id})
+    // console.log(req.user.name);
     res.json({
         status: 'success',
         globalNotes,

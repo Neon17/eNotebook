@@ -64,28 +64,18 @@ export default function Notes(props){
         <div className='container p-2'>
             <div className='container my-2'>
                 <h3 className='text-center'>Global Notes</h3>
-                {(alert)&& 
-                    <div class="alert alert-danger" role="alert">
-                        {alert}
-                </div>}
-                {!(alert) && 
-                    <div style={{height: '57.6px',width: '100%'}}></div>
-                }
                 <div className='py-2 d-flex flex-wrap'>
                     {(globalNotes) && (globalNotes.map((element)=>{
                         return (<div className="card m-2" key={element._id} style={{width: '18rem'}}>
                             <div className="card-body">
                                 <h5 className="card-title">{element.title}</h5>
                                 <p className="card-text">{element.description}</p>
+                                {/* <p className="card-text">Created By: {element.createdBy}</p> */}
                                 <p className="card-text">{element.date.split('T')[0]}</p>
                             </div>
                         </div>)
                     }))}
                 </div>
-
-            </div>
-            <div className='container my-2'>
-                <h3 className='text-center'>Your Notes</h3>
                 {(alert)&& 
                     <div class="alert alert-danger" role="alert">
                         {alert}
@@ -93,6 +83,9 @@ export default function Notes(props){
                 {!(alert) && 
                     <div style={{height: '57.6px',width: '100%'}}></div>
                 }
+            </div>
+            <div className='container my-2'>
+                <h3 className='text-center'>Your Notes</h3>
                 <div className='py-2 d-flex flex-wrap'>
                     {(localNotes) && (localNotes.map((element)=>{
                         return (<div className="card m-2" key={element._id} style={{width: '18rem'}}>
@@ -106,7 +99,13 @@ export default function Notes(props){
                         </div>)
                     }))}
                 </div>
-
+                {(alert)&& 
+                    <div class="alert alert-danger" role="alert">
+                        {alert}
+                </div>}
+                {!(alert) && 
+                    <div style={{height: '57.6px',width: '100%'}}></div>
+                }
             </div>
         </div>
     )

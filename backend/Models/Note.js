@@ -18,6 +18,11 @@ const noteSchema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.ObjectId,
         required: [true, 'created by is required']
+    },
+    visibility: {
+        type: String,
+        default: 'Local',
+        required: [true, 'Visibility is required']
     }
 })
 
