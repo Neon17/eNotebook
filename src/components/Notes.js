@@ -9,15 +9,29 @@ export default function Notes(props){
     let [data,setData] = useState();
     let [alert,setAlert] = useState(null);
     
+    
     useEffect(()=>{
         if ((!localStorage.getItem('token')))
             navigate('/login',{ replace: true })
         else {
-            axios.get("http://localhost:5000/api/v1/notes/")
-                .then((res)=>{
-                    setData(res.data.data);
-                })
-                .catch((err)=>console.error(err));
+            const headers= {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+            axios.get(
+                "http://localhost:5000/api/v1/notes/",
+                { headers },
+            )
+            .then((res)=>{
+                console.log(res.data.data);
+                setData(res.data.data);
+                if (res.data.status === 'error'){
+                    if (res.data.message === 'jwt expired'){
+                        localStorage.removeItem('token');
+                        navigate('/login',{ replace: true })
+                    }
+                }
+            })
+            .catch((err)=>console.error(err));
         }
     })
     

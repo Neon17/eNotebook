@@ -47,6 +47,9 @@ function Home (props){
                 setStatusColor('success');
             }
             else if (res.data.status === 'error'){
+                if (res.data.message === 'jwt expired'){
+                    navigate('/login',{ replace: true })
+                }
                 setStatus(`Error! ${res.message}`);
                 setStatusColor('danger');
             }

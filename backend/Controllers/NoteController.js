@@ -1,17 +1,5 @@
 const Note = require('./../Models/Note');
-const fs = require('fs');
-
-const asyncErrorHandler = (func)=>{
-    return (req,res,next)=>{
-        (func(req,res,next)).catch((err)=>{
-            res.status(404);
-            res.json({
-                status: 'error',
-                message: err.message
-            })   
-        })
-    }
-}
+const asyncErrorHandler = require('./../utils/AsyncErrorHandler');
 
 exports.getNotes = asyncErrorHandler(async (req,res)=>{
     const data = await Note.find({});
