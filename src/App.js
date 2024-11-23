@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import NoteState from './context/notes/NoteState';
 import Logout from './components/Logout';
+import Profile from './components/Profile';
 // import { useEffect } from 'react';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route exact path = "/signup" element={<Signup/>} />
           <Route exact path = "/logout" element={<Logout/>} />
           <Route exact path = "/about" element={`About Page`} />
+          <Route exact path = "/profile" element={<Profile/>}/>
           <Route path = '*' element="Page Not Found" />
         </Routes>
       </Router>
