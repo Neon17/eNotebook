@@ -23,6 +23,23 @@ function Home (props){
     useEffect(()=>{
         if ((!localStorage.getItem('token')))
             navigate("/login",{ replace: true })  
+        const headers= {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }
+        axios.get(
+            "http://localhost:5000/api/v1/notes",
+            { headers }
+        )
+        .then((res)=>{
+            if (res.data.status==='error'){
+                if (res.data.message === 'jwt expired'){
+                    localStorage.removeItem('token');
+                    navigate('/login',{ replace: true })
+                }
+            }
+        })
     })
 
     let postNote = ()=>{

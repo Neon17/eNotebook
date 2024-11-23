@@ -71,3 +71,20 @@ exports.login = async (req,res)=>{
         })
     }
 }
+
+exports.profile = async(req,res)=>{
+    try{
+        let user = req.user;
+        user.password = undefined;
+        res.json({
+            status: 'success',
+            data: user
+        })
+    }
+    catch(err){
+        res.status(200).json({
+            status: 'error',
+            message: err.message
+        })
+    }
+}

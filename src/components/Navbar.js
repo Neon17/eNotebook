@@ -14,7 +14,7 @@ function Navbar(props){
             <Link name="" id="" className="btn btn-primary" to="/signup" role="button" >Signup</Link></>);
         }
         else {
-            setBtns(<Link name="" id="" className="btn btn-primary me-2" to="/logout" role="button" >Logout</Link>)
+            setBtns(<Link name="" id="" className="btn btn-primary btn-sm me-2" to="/logout" role="button" >Logout</Link>)
             if ((location.pathname==='/login')||(location.pathname==='/signup')) navigate('/');
         }
     },[location])
@@ -26,18 +26,23 @@ function Navbar(props){
                 <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                    <Link className={`nav-link${(location.pathname==='/home')?' active':''}`} aria-current="page" to="/">Home</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className={`nav-link${(location.pathname==='/about')?' active':''}`} to="/about">About</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className={`nav-link${(location.pathname==='/notes')?' active':''}`} to="/notes">Notes</Link>
-                    </li>
-                </ul>
-                {btns}             
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                        <Link className={`nav-link${(location.pathname==='/home')?' active':''}`} aria-current="page" to="/">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link className={`nav-link${(location.pathname==='/about')?' active':''}`} to="/about">About</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link className={`nav-link${(location.pathname==='/notes')?' active':''}`} to="/notes">Notes</Link>
+                        </li>
+                        {!state && 
+                            <div className="nav-item">
+                                <Link className={`nav-link${(location.pathname==='/profile')?' active':''}`} to="/profile">Profile</Link>
+                            </div> 
+                        }
+                    </ul>
+                    {btns}
                 </div>
             </div>
         </nav>

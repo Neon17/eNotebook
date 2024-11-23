@@ -24,7 +24,11 @@ const userSchema = new mongoose.Schema({
            message: 'Password and Confirm Password doesnt match'
         }
     },
-    DateOfBirth: Date,
+    DateOfBirth: {
+        type: String,
+        required: [true, 'Date of Birth is required'],
+        default: Date.now()
+    },
 });
 
 userSchema.methods.comparePasswordInDb = async (pswd, pswdDB)=>{
