@@ -61,7 +61,7 @@ export default function Notes(props){
     // }, 5000);
     
     return (
-        <div className='container p-2'>
+        <div className='container-fluid p-2' style={{backgroundColor: 'aliceblue',minHeight: '100vh'}}>
             <div className='container my-2'>
                 <h3 className='text-center'>Global Notes</h3>
                 <div className='py-2 d-flex flex-wrap'>

@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     DateOfBirth: {
         type: String,
         required: [true, 'Date of Birth is required'],
-        default: Date.now()
+        default: new Date().toISOString().split("T")[0]
     },
 });
 

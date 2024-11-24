@@ -82,7 +82,7 @@ function Home (props){
     },6000)
 
     return (
-        <div>
+        <div className='container-fluid p-2' style={{backgroundColor: 'aliceblue',minHeight: '100vh'}}>
             <div className="container">
                 <h3 className='mb-4 mt-3'>Create a Note</h3>
 

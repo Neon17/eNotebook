@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Profile(){
-    const navigate = useNavigate();
     let [data,setData] = useState(null);
     let [updateStatus, setUpdateStatus] = useState(false);
+    const navigate = useNavigate();
 
     const changeField = (event)=>{
         if (updateStatus){
@@ -13,6 +13,9 @@ export default function Profile(){
                 setData({name: event.target.value});
             else if (event.target.id==='profileemail')
                 setData({email: event.target.value});
+            else if (event.target.id==='profiledob'){
+                setData({DateOfBirth: event.target.value});
+            }
         }
     }
 
@@ -34,8 +37,9 @@ export default function Profile(){
                     navigate('/login',{ replace:true });
                 }
             }
-            else
+            else{
                 setData(res.data.data);
+            }
         })
         .catch((err)=>{
             console.error(err.message);
@@ -49,19 +53,19 @@ export default function Profile(){
                 <form>
                     <div className="mb-3">
                         <label htmlFor="" className="form-label">Name</label>
-                        <input type="text" name="" id="profilename" value={(data)?data.name:""} onChange={changeField} className="form-control" placeholder="" aria-describedby="helpId" />
+                        <input type="text" name="" id="profilename" value={data?data.name:""} onChange={changeField} className="form-control" placeholder="" aria-describedby="helpId" readOnly={(updateStatus)?false:true}/>
                     </div>                    
                     <div className="mb-3">
                         <label htmlFor="" className="form-label">Email</label>
-                        <input type="email" name="" id="profileemail" value={(data)?data.email:""} onChange={changeField} className="form-control" placeholder="" aria-describedby="emailHelpId" />
+                        <input type="email" name="" id="profileemail" value={data?data.email:""} onChange={changeField} className="form-control" placeholder="" aria-describedby="emailHelpId" readOnly={(updateStatus)?false:true}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="" className="form-label">Date of Birth</label>
-                        <input type="date" name="" id="profiledob" className="form-control" placeholder="" aria-describedby="helpId" />
+                        <input type="date" name="" id="profiledob" value={data?data.DateOfBirth:"1111-11-11"} onChange={changeField} className="form-control" placeholder="" aria-describedby="helpId" readOnly={(updateStatus)?false:true}/>
                     </div>
                     <div className='d-flex justify-content-end'>
                         <button type="button" onClick={changeUpdateStatus} className="btn btn-primary btn-sm" data-bs-toggle="button" aria-pressed="false" autoComplete="off">
-                            Edit
+                            {(updateStatus)?'Update':'Edit'}
                         </button>
                     </div>
                 </form> 
@@ -79,7 +83,7 @@ export default function Profile(){
                     </div>
                     <div className='d-flex justify-content-end'>
                         <button type="button" className="btn btn-primary btn-sm" data-bs-toggle="button" aria-pressed="false" autoComplete="off">
-                            {(updateStatus)?'Update':'Edit'}
+                            Edit
                         </button>
                     </div>
                 </form>
