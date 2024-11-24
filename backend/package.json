@@ -15,6 +15,7 @@
     "express": "^4.21.1",
     "inotebook-backend": "file:",
     "mongoose": "^8.8.1",
+    "nodemailer": "^6.9.16",
     "validator": "^13.12.0"
   }
 }

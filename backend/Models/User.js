@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -29,10 +30,24 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Date of Birth is required'],
         default: new Date().toISOString().split("T")[0]
     },
+    passwordResetToken: String,
+    passwordResetTokenExpires: Date,
+    passwordCreatedAt: {
+        type: String,
+        required: true,
+        default: new Date().toISOString()
+    }
 });
 
 userSchema.methods.comparePasswordInDb = async (pswd, pswdDB)=>{
     return await bcrypt.compare(pswd, pswdDB);
+}
+
+userSchema.methods.createResetPasswordToken = function(){
+    const resetToken = crypto.randomBytes(32);
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetTokenExpires = Date.now()+10*60*1000;
+    return resetToken;
 }
 
 userSchema.pre('save',function (next){

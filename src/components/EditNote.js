@@ -79,10 +79,10 @@ function EditNote (){
     }, 5000);
 
     return (
-        <div>
+        <div className='container-fluid p-2' style={{backgroundColor: 'aliceblue',minHeight: '100vh'}}>
             <div className="container">                
                 <h3 className='mb-4 mt-3 d-flex align-items-center'>
-                    <Link name="" id="" className="btn btn-light m-2" to="/notes" role="button">&larr;</Link>
+                    <Link name="" id="" className="btn m-2" to="/notes" role="button">&larr;</Link>
                     Edit a Note
                 </h3>
                 <div className="mb-3">
